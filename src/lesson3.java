@@ -1,12 +1,12 @@
 import java.util.Random;
 import java.util.Scanner;
-public class lesson3 {
+public class lesson3
+{
 
 
     public static void main(String[] args)
     {
         lessonGame();
-
     }
     /**
      * 1. Написать программу, которая загадывает случайное число от 0 до 9, и пользователю дается 3 попытки угадать это число.
@@ -28,7 +28,7 @@ public class lesson3 {
             Scanner scanner = new Scanner(System.in);
             int imputNumber = scanner.nextInt();
 
-            /*if(scanner.hasNextInt())          //много было вариантов куда установить этот код но ни один
+            /*if(scanner.hasNextInt())   //много было вариантов куда установить этот код но ни один
             {                                   // не верный
                 imputNumber = scanner.nextInt();*/
 
@@ -68,7 +68,45 @@ public class lesson3 {
         } else
         {
             System.out.println("Конец Игры");
-            scanner.close();
+            //scanner.close();
+
         }
+
     }
+
+    private static void guessTheWord (String [] args)
+    {
+        Random random = new Random();
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry",
+                "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut",
+                "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        int inWord = random.nextInt(words.length - 1);
+        String word = words [inWord];
+        int lenWord = word.length();
+        System.out.println("Компьютер загадал слово, попробуй его отгадать");
+        System.out.println(word);
+        Scanner scanner = new Scanner(System.in);
+        do
+            {
+            System.out.println("Введите ответ: (для выхода нажмите Enter)");
+            String answer = scanner.nextLine();
+            if (answer.equals("")) break;
+            else if (word.equals(answer))
+            {
+                System.out.println("Вы угадали слово, конец игры!");
+                break;
+            }
+            // если не угадал.
+                char[] charsAnsver = answer.toCharArray();
+            for (int i = 0; i<lenWord; i++)
+            {
+               if (i >= charsAnsver.length) break;
+               if (word.charAt(i) != charsAnsver[i]) charsAnsver[i] = '#';
+            }
+            StringBuilder comment = new StringBuilder(String.valueOf(charsAnsver));
+            for (int i = comment.length(); i < 15; i++ ) comment.append("#");
+            System.out.println(comment);
+            }
+        while (true);
     }
+}
